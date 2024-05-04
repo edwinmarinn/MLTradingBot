@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime as dt
 
 from lumibot.backtesting import YahooDataBacktesting
 from lumibot.brokers import Alpaca
@@ -8,8 +8,8 @@ from settings import settings
 
 
 def main():
-    start_date = datetime(2020, 1, 1)
-    end_date = datetime(2023, 12, 31)
+    start_date = dt.datetime(2020, 1, 1)
+    end_date = dt.datetime(2023, 12, 31)
     broker = Alpaca(settings.alpaca_credentials)
     strategy = MLTrader(
         name="mlstrat", broker=broker, parameters={"symbol": "SPY", "cash_at_risk": 0.5}

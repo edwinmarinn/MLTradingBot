@@ -1,6 +1,7 @@
+import datetime as dt
+
 from alpaca_trade_api import REST
 from lumibot.strategies import Strategy
-from timedelta import Timedelta
 
 from finbert_utils import estimate_sentiment
 from settings import settings
@@ -10,7 +11,7 @@ class MLTrader(Strategy):
     def initialize(self, symbol: str = "SPY", cash_at_risk: float = 0.5):
         self.symbol = symbol
         self.sleeptime = "24H"
-        self.last_trade = None
+        self.last_trade: str | None = None
         self.cash_at_risk = cash_at_risk
         self.api = REST(
             base_url=settings.ALPACA_BASE_URL,
@@ -26,7 +27,7 @@ class MLTrader(Strategy):
 
     def get_dates(self):
         today = self.get_datetime()
-        three_days_prior = today - Timedelta(days=3)
+        three_days_prior = today - dt.timedelta(days=3)
         return today.strftime("%Y-%m-%d"), three_days_prior.strftime("%Y-%m-%d")
 
     def get_sentiment(self):
