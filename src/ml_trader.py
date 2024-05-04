@@ -1,9 +1,7 @@
-from lumibot.brokers import Alpaca
-from lumibot.backtesting import YahooDataBacktesting
-from lumibot.strategies.strategy import Strategy
-from datetime import datetime
 from alpaca_trade_api import REST
+from lumibot.strategies import Strategy
 from timedelta import Timedelta
+
 from finbert_utils import estimate_sentiment
 from settings import settings
 
@@ -69,25 +67,3 @@ class MLTrader(Strategy):
                 )
                 self.submit_order(order)
                 self.last_trade = "sell"
-
-
-def main():
-    start_date = datetime(2020, 1, 1)
-    end_date = datetime(2023, 12, 31)
-    broker = Alpaca(settings.alpaca_credentials)
-    strategy = MLTrader(
-        name="mlstrat", broker=broker, parameters={"symbol": "SPY", "cash_at_risk": 0.5}
-    )
-    strategy.backtest(
-        YahooDataBacktesting,
-        start_date,
-        end_date,
-        parameters={"symbol": "SPY", "cash_at_risk": 0.5},
-    )
-    # trader = Trader()
-    # trader.add_strategy(strategy)
-    # trader.run_all()
-
-
-if __name__ == "__main__":
-    main()

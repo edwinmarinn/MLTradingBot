@@ -1,6 +1,5 @@
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
-from typing import Tuple
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 

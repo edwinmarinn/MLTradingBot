@@ -15,7 +15,15 @@ pydantic-settings = "*"
 
 [dev-packages]
 black = "*"
+autoflake = "*"
+isort = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.10"
 python_full_version = "3.10.13"
+
+[scripts]
+main = "python3 ./src/main.py"
+format = "/bin/bash ./scripts/format-code.sh"
+lint = "/bin/bash ./scripts/lint.sh"
